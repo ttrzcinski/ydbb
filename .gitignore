@@ -4,3 +4,6 @@ packages/
 *.pubxml.user
 *.csproj.user
 .vs/
+/.idea/.idea.Microsoft.Bot.Sample.SimpleEchoBot/.idea
+/.idea/.idea.Microsoft.Bot.Sample.SimpleEchoBot
+/.idea/config
