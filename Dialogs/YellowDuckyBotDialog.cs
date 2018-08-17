@@ -24,16 +24,16 @@ namespace ydbb.Dialogs
 
             var messageLower = message.ToLower();
 
-            if (message.Text == "pancakes?")
+            if (messageLower.Text == "pancakes?" || messageLower.Text == "pancakes" || messageLower.Text == "do you like pancakes?")
             {
                 PromptDialog.Confirm(
                     context,
-                    AfterResetAsync,
+                    AfterPancakesAsync,
                     "Do you like panckaces?",
                     "What?!",
                     promptStyle: PromptStyle.Auto);
             }
-            else if (message.Text == "reset")
+            else if (messageLower.Text == "reset")
             {
                 PromptDialog.Confirm(
                     context,
@@ -49,7 +49,7 @@ namespace ydbb.Dialogs
             }
         }
 
-        public async Task AfterResetAsync(IDialogContext context, IAwaitable<bool> argument)
+        private async Task AfterResetAsync(IDialogContext context, IAwaitable<bool> argument)
         {
             var confirm = await argument;
             if (confirm)
@@ -64,5 +64,19 @@ namespace ydbb.Dialogs
             context.Wait(MessageReceivedAsync);
         }
 
+        private async Task AfterPancakesAsync(IDialogContext context, IAwaitable<bool> argument)
+        {
+            var confirm = await argument;
+            if (confirm)
+            {
+                this.count = 1;
+                await context.PostAsync("Me too.");
+            }
+            else
+            {
+                await context.PostAsync("Diabetes?!.");
+            }
+            context.Wait(MessageReceivedAsync);
+        }
     }
 }
